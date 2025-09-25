@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  1. Product Calculator 
+function calculateItemTotal(price, quantity, discount = 0) {
+  if (isNaN(price) || isNaN(quantity) || isNaN(discount)) {
+    throw new Error("Invalid number input for product calculation.");
+  }
+  if (price < 0 || quantity < 0 || discount < 0) {
+    throw new Error("Price, quantity, and discount must be non-negative.");
+  }
+
+  const subtotal = price * quantity;
+  const discountAmount = subtotal * (discount / 100);
+  return subtotal - discountAmount;
+}
+
+//  2. Tax Calculator 
+function applyTax(amount, location) {
+  if (typeof amount !== "number" || amount < 0) {
+    throw new Error("Invalid amount for tax calculation.");
+  }
+  if (typeof location !== "string") {
+    throw new Error("Location must be a string.");
+  }
+
+  // Example tax rates by location
+  const taxRates = {
+    "lagos": 0.075,
+    "abuja": 0.05,
+    "kano": 0.06
+  };
+
+  // default to 8% if location not found
+  const taxRate = taxRates[location.toLowerCase()] ?? 0.08;
+  return amount * taxRate;
+}
+
+//  3. Shipping Calculator
+function calculateShipping(weightKg, distanceKm) {
+  if (weightKg <= 0 || distanceKm <= 0) {
+    throw new Error("Weight and distance must be positive numbers.");
+  }
+
+  const baseRatePerKg = 2;       // dollars per kg
+  const distanceRatePerKm = 0.1; // dollars per km
+  return (weightKg * baseRatePerKg) + (distanceKm * distanceRatePerKm);
+}
+
+//  4. Membership Discounts 
+function membershipDiscount(amount, level) {
+  if (typeof amount !== "number" || amount < 0) {
+    throw new Error("Invalid amount for membership discount.");
+  }
+  if (typeof level !== "string") {
+    throw new Error("Membership level must be a string.");
+  }
+
+  let discountRate;
+  // ternary operator for quick mapping
+  discountRate = level.toLowerCase() === "gold"   ? 0.15 :
+                 level.toLowerCase() === "silver" ? 0.10 :
+                 level.toLowerCase() === "bronze" ? 0.05 : 0;
+
+  return amount * discountRate;
+}
+
+// 5. Final Receipt Generator 
+function generateReceipt(items, location, weightKg, distanceKm, memberLevel) {
+  if (!Array.isArray(items) || items.length === 0) {
+    throw new Error("Items must be a non-empty array.");
+  }
+
+  // Local scope for subtotals
+  let productsTotal = 0;
+  items.forEach(item => {
+    const { price, quantity, discount } = item;
+    productsTotal += calculateItemTotal(price, quantity, discount);
+  });
+
+  const tax = applyTax(productsTotal, location);
+  const shipping = calculateShipping(weightKg, distanceKm);
+  const memberDiscount = membershipDiscount(productsTotal, memberLevel);
+  const grandTotal = productsTotal + tax + shipping - memberDiscount;
+
+  // Nicely formatted receipt
+  return `
+ SMART SHOPPING RECEIPT
+Items Total:        $${productsTotal.toFixed(2)}
+Location Tax:       $${tax.toFixed(2)}
+Shipping:           $${shipping.toFixed(2)}
+Membership Discount: -$${memberDiscount.toFixed(2)}
+GRAND TOTAL:        $${grandTotal.toFixed(2)}
+  `;
+}
+
+try {
+  const cartItems = [
+    { price: 20, quantity: 3, discount: 10 }, // price, qty, %discount
+    { price: 50, quantity: 1, discount: 0 }
+  ];
+
+  const receipt = generateReceipt(
+    cartItems,
+    "Lagos",   // location
+    5,         // total weight in kg
+    120,       // distance in km
+    "Gold"     // membership level
+  );
+
+  console.log(receipt);
+} catch (error) {
+  console.error("Error:", error.message);
+}
+
+    </script>
+</body>
+</html>
