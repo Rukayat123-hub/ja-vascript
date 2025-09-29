@@ -65,8 +65,8 @@ function membershipDiscount(amount, level) {
   let discountRate;
   // ternary operator for quick mapping
   discountRate = level.toLowerCase() === "gold"   ? 0.15 :
-                 level.toLowerCase() === "silver" ? 0.10 :
-                 level.toLowerCase() === "bronze" ? 0.05 : 0;
+  level.toLowerCase() === "silver" ? 0.10 :
+   level.toLowerCase() === "bronze" ? 0.05 : 0;
 
   return amount * discountRate;
 }

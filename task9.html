@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    // 1️⃣ Store grades in an array
+const grades = [78, 92, 45, 67, 89, 53, 38, 100];
+
+// 2️⃣ Function to calculate the average grade
+function getAverage(grades) {
+  if (!Array.isArray(grades) || grades.length === 0) {
+    throw new Error("Grades must be a non-empty array.");
+  }
+  let total = 0;
+  for (let i = 0; i < grades.length; i++) {
+    total += grades[i];
+  }
+  return total / grades.length;
+}
+
+// 3️⃣ Function to find the highest grade
+function getHighest(grades) {
+  if (!Array.isArray(grades) || grades.length === 0) {
+    throw new Error("Grades must be a non-empty array.");
+  }
+  let highest = grades[0];
+  for (let i = 1; i < grades.length; i++) {
+    if (grades[i] > highest) {
+      highest = grades[i];
+    }
+  }
+  return highest;
+}
+
+// 4️⃣ Function to find the lowest grade
+function getLowest(grades) {
+  if (!Array.isArray(grades) || grades.length === 0) {
+    throw new Error("Grades must be a non-empty array.");
+  }
+  let lowest = grades[0];
+  for (let i = 1; i < grades.length; i++) {
+    if (grades[i] < lowest) {
+      lowest = grades[i];
+    }
+  }
+  return lowest;
+}
+
+// 5️⃣ Challenge: Function to calculate pass rate
+function getPassRate(grades) {
+  if (!Array.isArray(grades) || grades.length === 0) {
+    throw new Error("Grades must be a non-empty array.");
+  }
+  let passCount = 0;
+  for (let i = 0; i < grades.length; i++) {
+    if (grades[i] >= 50) {
+      passCount++;
+    }
+  }
+  const percentage = (passCount / grades.length) * 100;
+  return percentage.toFixed(2) + "%";
+}
+
+// ===== Example Usage =====
+console.log("Grades:", grades.join(", "));
+console.log("Average Grade:", getAverage(grades).toFixed(2));
+console.log("Highest Grade:", getHighest(grades));
+console.log("Lowest Grade:", getLowest(grades));
+console.log("Pass Rate:", getPassRate(grades));
+
+   </script> 
+</body>
+</html>

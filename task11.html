@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+   
+
+ // Student Grades Management System
+
+// Arrays to store student data
+const students = [];   // names
+const grades   = [];   // numeric grades
+
+
+ // Add Student
+function addStudent(name, grade) {
+  if (typeof name !== "string" || name.trim() === "") {
+    throw new Error("Name must be a non-empty string.");
+  }
+  if (typeof grade !== "number" || grade < 0 || grade > 100) {
+    throw new Error("Grade must be a number between 0 and 100.");
+  }
+  students.push(name);
+  grades.push(grade);
+}
+
+
+ // Calculate Average Grade
+function calculateAverage() {
+  if (grades.length === 0) return 0;
+  let total = 0;
+  for (let i = 0; i < grades.length; i++) {
+    total += grades[i];
+  }
+  return total / grades.length;
+}
+
+
+ // Find Top & Bottom Student
+
+function findTopStudent() {
+  if (grades.length === 0) return null;
+  let topIndex = 0;
+  for (let i = 1; i < grades.length; i++) {
+    if (grades[i] > grades[topIndex]) topIndex = i;
+  }
+  return { name: students[topIndex], grade: grades[topIndex] };
+}
+
+function findBottomStudent() {
+  if (grades.length === 0) return null;
+  let bottomIndex = 0;
+  for (let i = 1; i < grades.length; i++) {
+    if (grades[i] < grades[bottomIndex]) bottomIndex = i;
+  }
+  return { name: students[bottomIndex], grade: grades[bottomIndex] };
+}
+
+
+// Grade Categorizer – letter grades
+
+function getLetterGrade(score) {
+  if (score >= 90) return "A";
+  if (score >= 80) return "B";
+  if (score >= 70) return "C";
+  if (score >= 60) return "D";
+  return "F";
+}
+
+
+ // Report Generate
+function generateReport() {
+  if (students.length === 0) {
+    console.log("No students in the system.");
+    return;
+  }
+
+  console.log("CLASS REPORT ");
+  for (let i = 0; i < students.length; i++) {
+    const letter = getLetterGrade(grades[i]);
+    console.log(
+      `${i + 1}. ${students[i]} - Grade: ${grades[i]} - Letter: ${letter}`
+    );
+  }
+
+  const average = calculateAverage();
+  const top = findTopStudent();
+  const bottom = findBottomStudent();
+
+  console.log("----");
+  console.log(`Class Average: ${average.toFixed(2)}`);
+  console.log(`Top Student: ${top.name} (${top.grade})`);
+  console.log(`Lowest Student: ${bottom.name} (${bottom.grade})`);
+  console.log("===");
+}
+
+
+try {
+  addStudent("Alice", 95);
+  addStudent("Bob", 82);
+  addStudent("Charlie", 67);
+  addStudent("Diana", 54);
+  addStudent("Ethan", 88);
+
+  generateReport();
+} catch (err) {
+  console.error("Error:", err.message);
+}
+
+
+    </script>
+</body>
+</html>

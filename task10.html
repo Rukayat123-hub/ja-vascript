@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+  
+  // 1️⃣ Create two arrays: movie names and ratings
+const movies = ["Inception", "Interstellar", "The Dark Knight", "Memento"];
+const ratings = [9.0, 8.6, 9.1, 8.4];
+
+// 2️⃣ Function to add a new movie with its rating
+function addMovie(movie, rating) {
+  if (typeof movie !== "string" || movie.trim() === "") {
+    throw new Error("Movie name must be a non-empty string.");
+  }
+  if (typeof rating !== "number" || rating < 0 || rating > 10) {
+    throw new Error("Rating must be a number between 0 and 10.");
+  }
+  movies.push(movie);
+  ratings.push(rating);
+}
+
+// 3️⃣ Function to calculate the average rating
+function getAverageRating() {
+  if (ratings.length === 0) return 0;
+  let total = 0;
+  for (let i = 0; i < ratings.length; i++) {
+    total += ratings[i];
+  }
+  return total / ratings.length;
+}
+
+// 4️⃣ Function to find the highest-rated movie
+function getTopMovie() {
+  if (movies.length === 0) return null;
+  let highestIndex = 0;
+  for (let i = 1; i < ratings.length; i++) {
+    if (ratings[i] > ratings[highestIndex]) {
+      highestIndex = i;
+    }
+  }
+  return `${movies[highestIndex]} (${ratings[highestIndex]})`;
+}
+
+// 5️⃣ Print a summary of all movies with their ratings
+function printSummary() {
+  console.log("=== Movie Ratings Summary ===");
+  for (let i = 0; i < movies.length; i++) {
+    console.log(`${i + 1}. ${movies[i]} - Rating: ${ratings[i]}`);
+  }
+  console.log(`Average Rating: ${getAverageRating().toFixed(2)}`);
+  console.log(`Top Movie: ${getTopMovie()}`);
+}
+
+// ⚡ Challenge: Sort movies by rating (highest → lowest) and display
+function getSortedMovies() {
+  // Create an array of objects to pair movies with ratings
+  const combined = movies.map((m, i) => ({ movie: m, rating: ratings[i] }));
+  // Sort descending by rating
+  combined.sort((a, b) => b.rating - a.rating);
+  return combined;
+}
+
+// ===== Example Usage =====
+try {
+  addMovie("Tenet", 7.8);
+  addMovie("Dunkirk", 8.0);
+
+  printSummary();
+
+  console.log("\n=== Movies Sorted by Rating ===");
+  const sorted = getSortedMovies();
+  sorted.forEach((entry, index) =>
+    console.log(`${index + 1}. ${entry.movie} - Rating: ${entry.rating}`)
+  );
+} catch (err) {
+  console.error("Error:", err.message);
+}
+
+    </script>
+</body>
+</html>

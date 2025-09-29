@@ -1,0 +1,43 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+   <script>
+    // 1️⃣ Create an array with at least 5 items
+let shoppingList = ["Rice", "Beans", "Milk", "Bread", "Eggs"];
+
+// 2️⃣ Add a new item to the end of the list
+shoppingList.push("Butter");
+
+// 3️⃣ Remove the first item from the list
+shoppingList.shift(); // removes "Rice"
+
+// 4️⃣ Display the total number of items
+console.log(`Total items: ${shoppingList.length}`);
+
+// 5️⃣ Loop through the list and print each item with its position
+console.log("Shopping List Items:");
+shoppingList.forEach((item, index) => {
+  console.log(`${index + 1}. ${item}`);
+});
+
+// ⚡ Challenge: formatList function
+function formatList(list) {
+  if (!Array.isArray(list)) {
+    throw new Error("Input must be an array.");
+  }
+  // Create a numbered string with each item on its own line
+  return list.map((item, index) => `${index + 1}. ${item}`).join("\n");
+}
+
+// Example usage:
+console.log("\nFormatted List:\n" + formatList(shoppingList));
+
+   </script> 
+ </body>
+ </html>
