@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+// Instead of separate variables for student data:
+let name = "Alice";
+let age = 20;
+let grade = 85;
+
+console.log("Separate variables:");
+console.log("Name:", name);
+console.log("Age:", age);
+console.log("Grade:", grade);
+
+console.log(""); // Empty line
+// Objects group related data together:
+let student = {
+    name: "Alice",
+    age: 20,
+    grade: 85
+};
+
+console.log("Object:");
+console.log("Student object:", student);
+console.log("Student name:", student.name);
+console.log("Student age:", student.age);
+console.log("Student grade:", student.grade);
+
+console.log(""); // Empty line
+
+// Objects are much cleaner for related data
+let car = {
+    make: "Toyota",
+    model: "Camry", 
+    year: 2020,
+    color: "blue"
+};
+
+console.log("Car info:");
+console.log(`Car: ${car.year} ${car.make} ${car.model} (${car.color})`)
+// Creating objects
+let person = {
+    firstName: "John",
+    lastName: "Doe", 
+    age: 30,
+    city: "Boston"
+};
+let product = {
+    name: "Laptop",
+    price: 999,
+    inStock: true,
+    category: "Electronics"
+};
+console.log("Person object:", person);
+console.log("Product object:", product);
+
+console.log(""); // Empty line
+// Two ways to access properties:
+
+// 1. Dot notation (most common)
+console.log("Using dot notation:");
+console.log("First name:", person.firstName);
+console.log("Product name:", product.name);
+console.log("Product price:", product.price);
+console.log("product instock:",product.inStock);
+
+console.log(""); // Empty line
+
+// Bracket notation useful for dynamic property names
+let propertyName = "city";
+console.log("City:", person[propertyName]);
+
+console.log(""); // Empty line
+
+// Building strings with object properties
+console.log("Formatted output:");
+console.log(`${person.firstName} ${person.lastName} is ${person.age} years old and lives in ${person.city}.`);
+console.log(`The${product.name} cost ${product.price} and is  ${product.inStock}? "available": "out of stock".`);
+  
+
+// Example 1: Simple delay
+setTimeout(function() {
+    console.log("Hello after 1 second");
+}, 1000);
+
+// Example 2: With arrow function (shorter way)
+setTimeout(() => {
+    console.log("Hello after 3 seconds");
+}, 3000);
+
+// Example 3: Using a named function
+function showMessage() {
+    console.log("This is a delayed message");
+}
+
+setTimeout(showMessage, 2000);
+
+    </script>
+</body>
+</html>

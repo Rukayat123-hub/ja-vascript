@@ -20,7 +20,7 @@ function task1(){
 
 function task2(){
 function calculatePrice(price, customerType, isFirstPurchase) {
-  // 1️⃣ Determine base discount by customer type
+  //  Determine base discount by customer type
   let discount = 0;
   switch (customerType.toLowerCase()) {
     case "student":
@@ -41,10 +41,10 @@ function calculatePrice(price, customerType, isFirstPurchase) {
     discount += 0.05;
   }
 
-  // 3️⃣ Calculate final price
+  //  Calculate final price
   const finalPrice = (price * (1 - discount)).toFixed(2);
 
-  // 4️⃣ Print a full receipt
+  //  Print a full receipt
   console.log("------ RECEIPT ------");
   console.log(`Original Price : $${price.toFixed(2)}`);
   console.log(`Discount       : ${(discount * 100).toFixed(0)}%`);
@@ -81,7 +81,7 @@ function task3(){
   return `${advice} ${umbrellaAdvice}.`;
 }
 
-// ✅ Example usage
+//  Example usage
 console.log(weatherAdvice(30, true));
 // → "Freezing rain! Stay inside! Bring an umbrella."
 
@@ -98,7 +98,7 @@ function task4(){
   let message = "";
 
   if (action === "withdraw") {
-    // 🚫 Challenge: Block withdrawals over 500 at once
+    //  Challenge: Block withdrawals over 500 at once
     if (amount > 500) {
       return `Withdrawal limit exceeded: You tried to withdraw $${amount}, but the maximum per transaction is $500.`;
     }
@@ -122,7 +122,7 @@ function task4(){
   return message;
 }
 
-// ✅ Example usage
+//  Example usage
 console.log(atm(1000, "withdraw", 200));
 // → "Withdrawal of $200 successful. New balance: $800."
 
@@ -137,7 +137,7 @@ console.log(atm(500, "deposit", 150));
 function task5(){
     
 }   function personalAssistant(hour, weather, dayType) {
-  // ✅ Validate inputs
+  //  Validate inputs
   if (typeof hour !== "number" || hour < 0 || hour > 23) {
     return "Invalid hour. Please use a number between 0 and 23.";
   }
@@ -179,16 +179,16 @@ function task5(){
     dayAdvice = "Use this time for rest or light activities.";
   }
 
-  // 🌞 Extra: combine weather & time with logical AND
+  //  Extra: combine weather & time with logical AND
   if (weather.toLowerCase() === "sunny" && hour >= 12 && hour <= 16) {
     dayAdvice += " Perfect weather for a short walk!";
   }
 
-  // 📜 Final combined advice
+  //  Final combined advice
   return `${timeAdvice} ${dayAdvice} ${umbrellaAdvice}`;
 }
 
-// ✅ Example usage:
+//  Example usage:
 console.log(personalAssistant(9, "sunny", "workday"));
 // → "Good morning! Focus on your work tasks and stay productive. No umbrella needed."
 
